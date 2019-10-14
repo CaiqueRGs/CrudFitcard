@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CrudEstabelecimentos",
+    "\\CrudEstabelecimentos\\Controllers",
+    "\\CrudEstabelecimentos\\Views",
+    "\\CrudEstabelecimentos\\Views\\Estabelecimentos"
+  ],
+  "SelectedNode": "\\CrudEstabelecimentos\\Views\\Estabelecimentos\\UpdateEstabelecimentos.cshtml",
+  "PreviewInSolutionExplorer": false
+}

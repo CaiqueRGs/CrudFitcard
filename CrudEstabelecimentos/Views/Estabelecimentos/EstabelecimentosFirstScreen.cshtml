@@ -1,0 +1,142 @@
+﻿@using CrudEstabelecimentos.Models
+
+@model List<EstabelecimentoModel>
+@{
+    ViewBag.Title = "Estabelecimentos";
+}
+<div>
+    <a style="margin: 30px; margin-left: 0px" class="btn btn-primary" href="/Estabelecimentos/CreateEstabelecimentos" role="button">Adicionar Estabelecimento</a>
+
+</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+    <table style="width:100%" id="TableEstabelecimentos">
+        <tr>
+            <th>Id</th>
+            <th>Razao Social</th>
+            <th>Nome Fantasia</th>
+            <th>CNPJ</th>
+            <th>Email</th>
+            <th>Endereco</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Telefone</th>
+            <th>Data de Cadastro</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th>Agencia</th>
+            <th>Conta</th>
+        </tr>
+    </table>
+
+</body>
+</html>
+<style>
+    .dropdown-container {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(() => {
+            var Table = $("#TableEstabelecimentos").DataTable({
+                "ajax": {
+                    "url": "/Estabelecimentos/GetEstabelecimento",
+                    "type": "GET",
+                    "dataType": "json",
+                    "dataSrc": "Lista"
+                },
+                columns: [
+                    {
+                        "data": "Id",
+                        "title": "Id",
+                    },
+                    {
+                        "data": "Razao_Social",
+                        "title": "Razao Social",
+                    },
+                    {
+                        "data": "Nome_Fantasia",
+                        "title": "Nome Fantasia"
+                    },
+                    {
+                        "data": "CNPJ",
+                        "title": "CNPJ",
+                    },
+                    {
+                        "data": "Email",
+                        "title": "Email",
+                    },
+                    {
+                        "data": "Endereco",
+                        "title": "Endereço"
+                    },
+                    {
+                        "data": "Cidade",
+                        "title": "Cidade",
+                    },
+                    {
+                        "data": "Estado",
+                        "title": "Estado",
+                    },
+                    {
+                        "data": "Telefone",
+                        "title": "Telefone",
+                    },
+                    {
+                        "data": "DataString",
+                        "title": "Data de Cadastro",
+                    },
+                    {
+                        "data": "Categoria",
+                        "title": "Categoria",
+                    },
+                    {
+                        "data": "Status",
+                        "title": "Status",
+                        "render": function (data, type, model) { return model.Status === true ? "Ativo" : "Inativo" }
+                    },
+                    {
+                        "data": "Agencia",
+                        "title": "Agencia",
+                    },
+                    {
+                        "data": "Conta",
+                        "title": "Conta",
+                    },
+                    {
+                        orderable: false,
+                        searchable: false,
+                        "render": function (data, type, actualEstabelec) {
+                            return `
+                                                                <div class="dropdown-container">
+                                                                    <div class="dropdown">
+                                                                          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Opções</button>
+                                                                          <ul class="dropdown-menu">
+                                                                            <li>    <a href='https://localhost:44357/Estabelecimentos/UpdateEstabelecimentos?id=${actualEstabelec.Id}'>Editar</a></li>
+                                                                            <li>    <a href='https://localhost:44357/Estabelecimentos/DeleteEstabelecimentos?id=${actualEstabelec.Id}'>Delete</a></li>
+                                                                          </ul>
+                                                                    </div>
+                                                                </div>
+                                                               `;
+                        }
+                    },
+                ]
+            })
+        })
+    </script>
+    <div style="width:100%; position: relative; left:50%; color: green;">
+        @TempData["Create"]
+        @TempData["Edit"]
+        @TempData["Delete"]
+    </div>
+}
+
